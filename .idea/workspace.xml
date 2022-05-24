@@ -5,28 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70f55b58-8d3a-4a5f-aa56-5db47d9180af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/App/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PageNotFound/PageNotFound.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PageNotFound/PageNotFound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Portfolio/Portfolio.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Portfolio/Portfolio.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Promo/Promo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Promo/Promo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Techs/Techs.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Techs/Techs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer/Footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavTab/NavTab.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavTab/NavTab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ToolWindowGit.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-frontend/src/components/PageNotFound",
+    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-frontend/src/components/NavTab",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,11 +57,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\NavTab" />
+      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Navigation" />
+      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Footer" />
+      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Header" />
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\PageNotFound" />
-      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Techs" />
-      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Promo" />
-      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Portfolio" />
-      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\App" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\App" />
@@ -101,7 +90,7 @@
       <workItem from="1653394667341" duration="1741000" />
       <workItem from="1653399699561" duration="437000" />
       <workItem from="1653400161049" duration="140000" />
-      <workItem from="1653400327068" duration="1824000" />
+      <workItem from="1653400327068" duration="3500000" />
     </task>
     <servers />
   </component>

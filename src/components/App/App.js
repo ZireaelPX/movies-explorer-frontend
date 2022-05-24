@@ -1,8 +1,9 @@
 import { Route, Switch } from 'react-router-dom';
-// import Header from '../Header/Header';
+
+import Header from '../Header/Header';
 import Main from '../Main/Main';
 import PageNotFound from "../PageNotFound/PageNotFound";
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 
 import './App.css';
 
@@ -11,9 +12,9 @@ function App() {
     <div className="App">
         <Switch>
             <Route exact path="/">
-                {/*<Header loggedIn={false} />*/}
+                <Header loggedIn={false} />
                 <Main />
-                {/*<Footer />*/}
+                <Footer />
             </Route>
             <Route path="*">
                 <PageNotFound />

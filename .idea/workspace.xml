@@ -5,20 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70f55b58-8d3a-4a5f-aa56-5db47d9180af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Login/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Login/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Register/Register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/fonts.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Black.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Black.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Medium.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/fonts/inter/Inter-Regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vendor/normalize.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Movies/Movies.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Movies/Movies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Preloader/Preloader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Preloader/Preloader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/DataAllMovies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -50,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ToolWindowGit.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-frontend",
+    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-frontend/src/components",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -62,11 +61,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components" />
       <recent name="C:\Users\artem\dev\movies-explorer-frontend" />
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\NavTab" />
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Navigation" />
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Footer" />
-      <recent name="C:\Users\artem\dev\movies-explorer-frontend\src\components\Header" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\artem\dev\movies-explorer-frontend\src" />
@@ -98,7 +97,9 @@
       <workItem from="1653400161049" duration="140000" />
       <workItem from="1653400327068" duration="6153000" />
       <workItem from="1653407401734" duration="2957000" />
-      <workItem from="1653411332313" duration="600000" />
+      <workItem from="1653411332313" duration="1070000" />
+      <workItem from="1653416432930" duration="721000" />
+      <workItem from="1653467965875" duration="1831000" />
     </task>
     <servers />
   </component>

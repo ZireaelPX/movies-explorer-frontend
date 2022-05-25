@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Movies from "../Movies/Movies";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
@@ -16,6 +17,11 @@ function App() {
             <Route exact path="/">
                 <Header loggedIn={false} />
                 <Main />
+                <Footer />
+            </Route>
+            <Route path="/movies">
+                <Header loggedIn={true} />
+                <Movies />
                 <Footer />
             </Route>
             <Route exact path="/signin">

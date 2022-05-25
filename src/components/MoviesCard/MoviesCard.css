@@ -51,6 +51,20 @@
     cursor: pointer;
 }
 
+.card__button_delete {
+    transition: all 0.5s ease 0s;
+    width: 16px;
+    height: 16px;
+    background: #f9f9f9 center no-repeat;
+    opacity: 0;
+}
+
+.card__button_delete:hover {
+    opacity: 1;
+    visibility: visible;
+    background: #f9f9f9 url(../../images/icon-delete.svg) center no-repeat;
+}
+
 .card__button_inactive {
     background: #e3e3e3 url(../../images/icon-inactive.svg) center no-repeat;
 }

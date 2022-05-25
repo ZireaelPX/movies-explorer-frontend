@@ -1,8 +1,11 @@
 import {useState} from "react";
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
 const MoviesCard = ({ card }) => {
     const [favorite, setFavorite] = useState(false);
+
+    const { pathname } = useLocation();
 
     function handleToogleFavorite() {
         setFavorite(!favorite);
@@ -15,11 +18,15 @@ const MoviesCard = ({ card }) => {
             <div className="card__element">
                 <p className="card__title">{card.title}</p>
                 <div className="card__buttons">
-                    <button
-                        type="button"
-                        className={`card__button card__button${favorite ? '_active' : '_inactive'}`}
-                        onClick={handleToogleFavorite}
-                    />
+                    {pathname === '/saved-movies' ?
+                        <button type="button" className="card__button card__button_delete" />
+                        :
+                        <button
+                            type="button"
+                            className={`card__button card__button${favorite ? '_active' : '_inactive'}`}
+                            onClick={handleToogleFavorite}
+                        />
+                    }
                 </div>
             </div>
             <p className="card__duration">{card.duration}</p>

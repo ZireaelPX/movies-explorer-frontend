@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
 import '../Login/Login.css';
 
-function Register() {
+const Register = () => {
     return (
-
         <section className="form">
             <div className="form__container">
                 <Link to="/" className="form__link">
@@ -16,19 +15,19 @@ function Register() {
                     <div className="form__items">
                         <label className="form__item">
                             <p className="form__item-text">Имя</p>
-                            <input type="text" className="form__field" defaultValue="Артём" required />
+                            <input type="text" className="form__field" defaultValue="Артём" required/>
                             <p className="form__error">Что-то пошло не так...</p>
                         </label>
-
                         <label className="form__item">
                             <p className="form__item-text">E-mail</p>
-                            <input type="email" className="form__field" defaultValue="artempavlov2039@gmail.com" required />
+                            <input type="email" className="form__field" defaultValue="artempavlov2039@gmail.com"
+                                   required/>
                             <p className="form__error">Что-то пошло не так...</p>
                         </label>
-
                         <label className="form__item">
                             <p className="form__item-text">Пароль</p>
-                            <input type="password" className="form__field form__field_color-error" defaultValue="••••••••••" required />
+                            <input type="password" className="form__field form__field_color-error"
+                                   defaultValue="••••••••••" required/>
                             <p className="form__error form__error-display">Что-то пошло не так...</p>
                         </label>
                     </div>
@@ -44,7 +43,6 @@ function Register() {
                 </p>
             </div>
         </section>
-
     );
 }
 

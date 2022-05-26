@@ -6,14 +6,12 @@ import './SavedMovies.css';
 
 const SavedMovies = () => {
     return (
-
         <div className="saved-movies">
             <SearchForm/>
             <MoviesCardList
                 cards={saveMovies}
-                buttonMore={false} />
+                buttonMore={false}/>
         </div>
-
     );
 };
 

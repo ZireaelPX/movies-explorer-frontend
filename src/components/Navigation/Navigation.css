@@ -76,6 +76,10 @@
   cursor: pointer;
 }
 
+.navigation__link_active {
+  font-weight: 500;
+}
+
 .navigation__link_type_profile {
   display: flex;
   justify-content: center;

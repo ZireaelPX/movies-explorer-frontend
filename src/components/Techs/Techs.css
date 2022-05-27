@@ -99,6 +99,7 @@
 @media (max-width: 540px) {
   .techs {
     padding: 70px 18px;
+    background: #fff;
   }
 
   .techs__header {

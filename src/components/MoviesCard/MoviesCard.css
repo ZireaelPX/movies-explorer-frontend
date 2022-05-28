@@ -1,0 +1,101 @@
+.card {
+    padding: 0;
+}
+
+.card__image {
+    object-fit: cover;
+    max-width: 100%;
+    width: 100%;
+    height: 150px;
+}
+
+.card__element {
+    display: flex;
+    justify-content: space-between;
+    min-height: 44px;
+    margin: 11px 2px 0 0;
+}
+
+.card__duration {
+    margin: 1px 0 15px;
+    padding-top: 7px;
+    border-top: 1px solid #e8e8e8;
+    color: #a0a0a0;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.card__title {
+    max-width: 220px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.card__buttons {
+    margin: -2px 0 0;
+}
+
+.card__button {
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 36px;
+    transition: all 0.3s ease 0s;
+}
+
+.card__button:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+.card__button_delete {
+    transition: all 0.5s ease 0s;
+    width: 16px;
+    height: 16px;
+    background: #f9f9f9 center no-repeat;
+    opacity: 0;
+}
+
+.card__button_delete:hover {
+    opacity: 1;
+    visibility: visible;
+    background: #f9f9f9 url(../../images/icon-delete.svg) center no-repeat;
+}
+
+.card__button_inactive {
+    background: #e3e3e3 url(../../images/icon-inactive.svg) center no-repeat;
+}
+
+.card__button_active {
+    background: #e3e3e3 url(../../images/icon-active.svg) center no-repeat;
+}
+
+@media (max-width: 800px) {
+    .card__image {
+        object-fit: cover;
+        max-width: 100%;
+        width: 100%;
+        height: 190px;
+    }
+
+    .card__title {
+        max-width: 290px;
+    }
+}
+
+@media (max-width: 540px) {
+    .card__title {
+        font-size: 12px;
+        line-height: 17px;
+    }
+
+    .card__image {
+        object-fit: cover;
+        max-width: 100%;
+        width: 100%;
+        height: 168px;
+    }
+}

@@ -39,9 +39,9 @@ function MoviesCard({
                     savedMovie.movieId == card.id &&
                     savedMovie.owner == currentUser._id
             )
-            if(boolSavedFilms){
+            if (boolSavedFilms) {
                 setIsSaved(true);
-            }else{
+            } else {
                 setIsSaved(false)
             }
         }
@@ -55,20 +55,21 @@ function MoviesCard({
         // }
     }, [savedMovies]);
 
-    console.log(savedMovies.some((savedMovie) => {
-        console.log(savedMovie)
-        console.log(currentUser._id)
-        console.log(savedMovie.movieId)
-        console.log(card.id)
-        return savedMovie.movieId === card.id &&
-            savedMovie.owner === currentUser._id
-    }));
+    // console.log(savedMovies.some((savedMovie) => {
+    //     console.log(savedMovie)
+    //     console.log(currentUser._id)
+    //     console.log(savedMovie.movieId)
+    //     console.log(card.id)
+    //     return savedMovie.movieId === card.id &&
+    //         savedMovie.owner === currentUser._id
+    // }));
 
     const moviesIcon = isSaved ? `card__button card__button_active` : `card__button card__button_inactive`;
     const icon = location.pathname === '/movies' ? moviesIcon : 'card__button_delete';
 
-    const handleLike = () => {
-        if (!isSaved) {
+    const handleLike = (e) => {
+        console.log(e.target.classList.contains('card__button_active'))
+        if (e.target.classList.contains('card__button_inactive')) {
             for (let key in card) {
                 if (card[key] === null || card[key] === '') card[key] = 'нет данных';
             }
@@ -82,14 +83,19 @@ function MoviesCard({
                 .catch((err) => {
                     console.log(err);
                 });
-        } else {
+        } else if (e.target.classList.contains('card__button_active')) {
+            console.log(card.id)
             savedMovies.forEach((savedMovie) => {
-                if (savedMovie.movieId === card.id) {
-                    api.deleteMovie(savedMovie._id).catch((err) => {
-                        console.log(err);
-                    });
+                if (savedMovie.movieId == card.id) {
+                    console.log('Успешно')
+                    api.deleteMovie(savedMovie._id)
+                        .catch((err) => {
+                            console.log(err);
+                        });
                 }
             });
+            // const arr = savedMovies.filter(item => item.movieId == card.id);
+            // console.log(arr)
             setIsSaved(false);
         }
     };
@@ -137,7 +143,9 @@ function MoviesCard({
                         <button type="button"
                             // className={`card__button card__button_active`}
                                 className={icon}
-                                onClick={location.pathname === '/movies' ? handleLike : unsave}/>
+                                onClick={(e) => {
+                                    location.pathname === '/movies' ? handleLike(e) : unsave()
+                                }}/>
 
                     </div>
                 </div>

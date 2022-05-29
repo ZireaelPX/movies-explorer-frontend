@@ -38,6 +38,7 @@ function Movies() {
         width: undefined,
     });
 
+
     React.useEffect(() => {
         function handleResize() {
             setWindowSize({
@@ -68,8 +69,7 @@ function Movies() {
 
     React.useEffect(() => {
         setSearchQuery('');
-        api
-            .getSavedMovies()
+        api.getSavedMovies()
             .then((movies) => {
                 if (movies.message) {
                     console.log(movies.message);

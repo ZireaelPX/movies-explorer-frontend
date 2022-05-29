@@ -34,11 +34,11 @@
   display: none;
   margin: 0;
   padding: 0;
-  width: 22px;
-  height: 22px;
+  width: 43px;
+  height: 43px;
   outline: none;
   border: none;
-  background: transparent url('../../images/icon-close.svg') center center / 32px no-repeat;
+  background: transparent url('../../images/icon-close.svg') 100%/43px no-repeat;
   align-self: flex-end;
   transition: all 0.3s ease 0s;
 }
@@ -126,7 +126,7 @@
     min-height: 100vh;
     margin-left: auto;
     flex-direction: column;
-    padding: 27px 27px 90px;
+    padding: 18px 27px 90px;
     background-color: #fff;
   }
 

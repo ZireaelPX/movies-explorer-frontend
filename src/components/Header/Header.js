@@ -5,7 +5,7 @@ import Navigation from '../Navigation/Navigation';
 import './Header.css';
 import logo from '../../images/logo.svg';
 
-const Header = ({loggedIn, isLoading}) => {
+const Header = ({loggedIn, isLoading, handleToggleMenu, showItems}) => {
     const {pathname} = useLocation();
 
     return (
@@ -14,7 +14,8 @@ const Header = ({loggedIn, isLoading}) => {
                 <img className="header__logo" src={logo} alt="Дипломная работа - Яндекс Практикум"></img>
             </Link>
             {
-                isLoading ? '' : loggedIn ? <Navigation/> : <NavTab/>
+                isLoading ? '' : loggedIn ? <Navigation handleToggleMenu={handleToggleMenu} showItems={showItems}/> :
+                    <NavTab/>
             }
         </header>
     );

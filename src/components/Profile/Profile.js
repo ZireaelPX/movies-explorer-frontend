@@ -1,11 +1,11 @@
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 
 import {CurrentUserContext} from '../../context/CurrentUserContext';
 import MainApi from '../../utils/MainApi';
 
 import './Profile.css';
 
-const Profile = ({onSignOut, openPopup}) => {
+const Profile = ({onSignOut, openPopup, handleToggleMenu}) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState(currentUser.name);
@@ -17,6 +17,12 @@ const Profile = ({onSignOut, openPopup}) => {
     const [isStateEditButton, setStateEditButton] = useState(false);
 
     const [isSubmiting, setSubmiting] = useState(false);
+
+
+    useEffect(() => {
+        handleToggleMenu(false);
+    }, []);
+
 
     // Функция для изменения имени пользователя
     function handleNameChange(e) {

@@ -8,7 +8,7 @@ import mainApi from '../../utils/MainApi.js';
 
 import './Movies.css';
 
-const Movies = ({openPopup}) => {
+const Movies = ({openPopup, handleToggleMenu}) => {
     const [films, setFilms] = useState(null);
     const [filmsSaved, setFilmsSaved] = useState(null);
     const [preloader, setPreloader] = useState(false);
@@ -21,6 +21,7 @@ const Movies = ({openPopup}) => {
     const [filmsShowedWithTumbler, setFilmsShowedWithTumbler] = useState([]);
 
     useEffect(() => {
+        handleToggleMenu(false);
         setMoviesCount(getMoviesCount());
         const handlerResize = () => setMoviesCount(getMoviesCount());
         window.addEventListener('resize', handlerResize);

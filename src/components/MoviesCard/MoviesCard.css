@@ -73,6 +73,12 @@
     background: #e3e3e3 url(../../images/icon-active.svg) center no-repeat;
 }
 
+.card__image-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 800px) {
     .card__image {
         object-fit: cover;
@@ -95,7 +101,7 @@
     .card__image {
         object-fit: cover;
         max-width: 100%;
-        width: 100%;
+        width: 260px;
         height: 168px;
     }
 }

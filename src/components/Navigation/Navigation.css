@@ -90,6 +90,7 @@
   border-radius: 20px;
   background-color: #F9F9F9;
   font-size: 14px;
+  border: 1px solid #000000;
 }
 
 .navigation__link_path_color {

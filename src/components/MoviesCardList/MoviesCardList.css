@@ -36,6 +36,11 @@
     margin: 0 auto;
     padding: 45px 0 49px;
 }
+.cards__text_status{
+    text-align: center;
+    margin-top: 100px;
+    font-weight: 700;
+}
 
 @media (max-width: 800px) {
     .cards {

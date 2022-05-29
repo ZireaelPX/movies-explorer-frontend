@@ -21,7 +21,7 @@ const MoviesCardList = ({films, savedMoviesToggle, filmsSaved, filmsRemains, han
                         ))}
                     </ul>
                 ) : (
-                    <div className="cards__text">Фильмы не найдены, пожалуйста обновите страницу!</div>
+                    <div className="cards__text_status">Фильмы не найдены, пожалуйста обновите страницу!</div>
                 )
             }
 

@@ -3,19 +3,19 @@ import {Link, NavLink, useLocation} from 'react-router-dom';
 
 import './Navigation.css';
 
-const Navigation = ({ handleToggleMenu, showItems }) => {
-    // const [showItems, setShowItems] = useState(false);
+const Navigation = () => {
+    const [showItems, setShowItems] = useState(false);
     const {pathname} = useLocation();
 
-    // const handleToggleMenu = () => setShowItems(!showItems);
+    const handleToggleMenu = () => setShowItems(!showItems);
 
     return (
         <nav className="navigation">
-            <button className="navigation__btn-menu" type="button" onClick={() => handleToggleMenu(true)}></button>
+            <button className="navigation__btn-menu" type="button" onClick={handleToggleMenu}></button>
             <div className={`navigation__container ${showItems ? 'navigation__container_visible' : ''}`}>
                 <div className="navigation__sidebar">
                     <div className="navigation__list-container">
-                        <button className="navigation__btn-close" type="button" onClick={() => handleToggleMenu(false)}></button>
+                        <button className="navigation__btn-close" type="button" onClick={handleToggleMenu}></button>
                         <ul className="navigation__list">
                             <li className="navigation__list-item navigation__list-item_type_main">
                                 <Link to="/" className="navigation__link">Главная</Link>

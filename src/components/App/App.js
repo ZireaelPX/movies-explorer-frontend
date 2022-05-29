@@ -30,19 +30,19 @@ function App() {
     const {pathname} = useLocation();
     const history = useHistory();
 
-    const [showItems, setShowItems] = useState(false);
+    // const [showItems, setShowItems] = useState(false);
 
     useEffect(() => {
         getUserInfo();
     }, []);
 
-    const handleToggleMenu = (toggle) => {
-        if(toggle){
-            setShowItems(true)
-        }else{
-            setShowItems(false)
-        }
-    };
+    // const handleToggleMenu = (toggle) => {
+    //     if(toggle){
+    //         setShowItems(true)
+    //     }else{
+    //         setShowItems(false)
+    //     }
+    // };
 
     // Получение данных о пользователе и запись в context
     function getUserInfo() {
@@ -116,7 +116,7 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
             <div className="App">
                 {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile' ?
-                    <Header loggedIn={loggedIn} isLoading={isLoading} handleToggleMenu={handleToggleMenu} showItems={showItems}/> : ''}
+                    <Header loggedIn={loggedIn} isLoading={isLoading}/> : ''}
 
                 <Switch>
                     <Route exact path="/">
@@ -129,7 +129,6 @@ function App() {
                         component={Movies}
                         isLoading={isLoading}
                         openPopup={openPopup}
-                        handleToggleMenu={handleToggleMenu}
                     />
 
                     <ProtectedRoute
@@ -138,7 +137,6 @@ function App() {
                         component={SavedMovies}
                         isLoading={isLoading}
                         openPopup={openPopup}
-                        handleToggleMenu={handleToggleMenu}
                     />
 
                     <ProtectedRoute
@@ -148,7 +146,6 @@ function App() {
                         isLoading={isLoading}
                         onSignOut={onSignOut}
                         openPopup={openPopup}
-                        handleToggleMenu={handleToggleMenu}
                     />
 
                     <Route path="/signin">

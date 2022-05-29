@@ -7,7 +7,7 @@ import mainApi from '../../utils/MainApi.js';
 
 import './SavedMovies.css';
 
-const SavedMovies = ({openPopup, handleToggleMenu}) => {
+const SavedMovies = ({openPopup}) => {
     const [films, setFilms] = useState(null);
     const [preloader, setPreloader] = useState(false);
     const [errorText, setErrorText] = useState('');
@@ -15,9 +15,9 @@ const SavedMovies = ({openPopup, handleToggleMenu}) => {
     const [filmsInputSearch, setFilmsInputSearch] = useState('');
     const [filmsShowed, setFilmsShowed] = useState([]);
 
-    useEffect(() => {
-        handleToggleMenu(false);
-    }, []);
+    // useEffect(() => {
+    //     handleToggleMenu(false);
+    // }, []);
 
     // Получение сохраненных фильмов
     async function handleGetMovies(inputSearch, tumbler) {

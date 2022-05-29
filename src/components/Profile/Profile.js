@@ -5,7 +5,7 @@ import MainApi from '../../utils/MainApi';
 
 import './Profile.css';
 
-const Profile = ({onSignOut, openPopup, handleToggleMenu}) => {
+const Profile = ({onSignOut, openPopup}) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState(currentUser.name);
@@ -18,10 +18,10 @@ const Profile = ({onSignOut, openPopup, handleToggleMenu}) => {
 
     const [isSubmiting, setSubmiting] = useState(false);
 
-
-    useEffect(() => {
-        handleToggleMenu(false);
-    }, []);
+    //
+    // useEffect(() => {
+    //     handleToggleMenu(false);
+    // }, []);
 
 
     // Функция для изменения имени пользователя

@@ -5,8 +5,8 @@ import isEmail from 'validator/es/lib/isEmail';
 import '../Login/Login.css';
 import logo from '../../images/logo.svg';
 
-
 const Register = ({ onRegister }) => {
+
     const [inputValues, setInputValues] = useState({});
     const [errors, setErrors] = useState({});
     const [isValidForm, setIsValidForm] = useState(false);

@@ -3,16 +3,16 @@ class Token {
         this.key = 'jwt';
     }
 
-    getToken() {
-        return localStorage.getItem(this.key);
-    }
-
     saveToken(token) {
         localStorage.setItem(this.key, token);
     }
 
     removeToken() {
         localStorage.removeItem(this.key);
+    }
+
+    getToken() {
+        return localStorage.getItem(this.key);
     }
 }
 

@@ -9,7 +9,7 @@ class MoviesApi {
             return res.json();
         }
 
-        return Promise.reject(`Извините, произошла ошибка - : ${res.status}`);
+        return Promise.reject(`Извините, на сервере произошла ошибка - : ${res.status}`);
     }
 
     getMovies() {

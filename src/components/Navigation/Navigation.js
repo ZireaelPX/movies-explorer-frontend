@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 
 import './Navigation.css';
@@ -7,13 +7,8 @@ const Navigation = () => {
     const [showItems, setShowItems] = useState(false);
     const {pathname} = useLocation();
 
-    const handleToggleMenu = () => setShowItems(!showItems);
-
-    useEffect(() => {
-        setShowItems(false);
-    }, []);
-
     console.log(pathname)
+    const handleToggleMenu = () => setShowItems(!showItems);
 
     return (
         <nav className="navigation">
@@ -28,19 +23,23 @@ const Navigation = () => {
                             </li>
                             <li className="navigation__list-item">
                                 <NavLink to="/movies"
-                                         className={`navigation__link ${pathname === '/movies' ? 'navigation__link_active' : ''}`}
+                                         className={`navigation__link 
+                                                ${pathname === '/movies' ? 'navigation__link_active' : ''}
+                                                ${pathname === '/' ? 'navigation__link_path_color' : ''}
+                                         `}
                                          activeClassName="navigation__link_active">Фильмы</NavLink>
                             </li>
                             <li className="navigation__list-item">
                                 <NavLink to="/saved-movies"
-                                         className={`navigation__link ${pathname === '/saved-movies' ? 'navigation__link_active' : ''}`}
-                                         activeClassName="navigation__link_active">Сохранённые
-                                    фильмы</NavLink>
+                                         className={`navigation__link 
+                                                ${pathname === '/saved-movies' ? 'navigation__link_active' : ''}
+                                                ${pathname === '/' ? 'navigation__link_path_color' : ''}
+                                         `}
+                                         activeClassName="navigation__link_active">Сохранённые фильмы</NavLink>
                             </li>
                         </ul>
                     </div>
-                    <NavLink to="/profile" className="navigation__link navigation__link_type_profile"
-                             activeClassName="navigation__link_active">Аккаунт</NavLink>
+                    <Link to="/profile" className="navigation__link navigation__link_type_profile">Аккаунт</Link>
                 </div>
             </div>
         </nav>

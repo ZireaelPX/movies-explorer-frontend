@@ -92,9 +92,17 @@
   font-size: 14px;
 }
 
+.navigation__link_path_color {
+  color: #ffffff;
+}
+
 @media (max-width: 800px) {
   .navigation__btn-menu {
     display: flex;
+  }
+
+  .navigation__link_path_color {
+    color: #000;
   }
 
   .navigation__container {

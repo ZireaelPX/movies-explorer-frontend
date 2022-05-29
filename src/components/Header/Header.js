@@ -1,20 +1,21 @@
-import {Link} from 'react-router-dom';
-import logo from '../../images/logo.svg';
-import NavAuth from '../NavTab/NavTab';
+import {Link, useLocation} from 'react-router-dom';
+import NavTab from '../NavTab/NavTab';
 import Navigation from '../Navigation/Navigation';
 
 import './Header.css';
+import logo from '../../images/logo.svg';
 
-const Header = ({loggedIn}) => {
+const Header = ({loggedIn, isLoading}) => {
+    const {pathname} = useLocation();
+
     return (
-        <header className={`header ${!loggedIn ? 'header_type_auth' : ''}`}>
+        <header className={`header ${pathname !== '/' ? '' : 'header_type_auth'}`}>
             <Link to="/" className="header__link">
-                <img className="header__logo" src={logo} alt="Логотип дипломной работы"></img>
+                <img className="header__logo" src={logo} alt="Дипломная работа - Яндекс Практикум"></img>
             </Link>
-
-            {!loggedIn && <NavAuth/>}
-            {loggedIn && <Navigation/>}
-
+            {
+                isLoading ? '' : loggedIn ? <Navigation/> : <NavTab/>
+            }
         </header>
     );
 };

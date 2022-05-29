@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="70f55b58-8d3a-4a5f-aa56-5db47d9180af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Movies/Movies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/Movies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SavedMovies/SavedMovies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavedMovies/SavedMovies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ToolWindowGit.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-api",
+    "last_opened_file_path": "C:/Users/artem/dev/movies-explorer-frontend",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -95,7 +94,8 @@
       <workItem from="1653634899586" duration="850000" />
       <workItem from="1653751667915" duration="2657000" />
       <workItem from="1653754367928" duration="11539000" />
-      <workItem from="1653809573450" duration="11057000" />
+      <workItem from="1653809573450" duration="11153000" />
+      <workItem from="1653821165080" duration="128000" />
     </task>
     <servers />
   </component>

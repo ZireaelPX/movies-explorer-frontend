@@ -199,7 +199,7 @@ const Movies = ({openPopup}) => {
                 preloader && <Preloader/>
             }
             {
-                errorText && <div className="movies__text-error">{errorText}</div>
+                errorText && <div className="cards__text_status">{errorText}</div>
             }
             {
                 !preloader && !errorText && films !== null && filmsSaved !== null && filmsShowed !== null &&

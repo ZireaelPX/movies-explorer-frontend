@@ -1,75 +1,151 @@
-import {useEffect, useState} from 'react';
+// const moviesIcon = isSaved ? `card__button card__button_active` : `card__button card__button_inactive`;
+// const icon = location.pathname === '/movies' ? moviesIcon : 'card__button_delete';
+
+import React from 'react';
 import {useLocation} from 'react-router-dom';
+import {CurrentUserContext} from '../../context/CurrentUserContext';
 
 import './MoviesCard.css';
+import api from '../../utils/MainApi';
 
-const MoviesCard = ({film, savedMoviesToggle, filmsSaved}) => {
-    const {pathname} = useLocation();
-    const [favorite, setFavorite] = useState(false);
+function MoviesCard({
+                        card,
+                        cardTitle,
+                        cardImageLink,
+                        duration,
+                        trailerLink,
+                        savedMovies,
+                        setSavedMovieList,
+                    }) {
+    const currentUser = React.useContext(CurrentUserContext);
+    const location = useLocation();
+    const [isSaved, setIsSaved] = React.useState(false);
 
-    useEffect(() => {
-        if (pathname !== '/saved-movies') {
-            const savedFilm = filmsSaved.filter((obj) => obj.movieId == film.id);
-
-            if (savedFilm.length > 0) {
-                setFavorite(true);
-            } else {
-                setFavorite(false);
+    React.useEffect(() => {
+        if (savedMovies.length > 0) {
+            // if (!isSaved) {
+            //     setIsSaved(
+            //         savedMovies.some(
+            //             (savedMovie) =>
+            //                 savedMovie.movieId == card.id &&
+            //                 savedMovie.owner == currentUser._id
+            //         )
+            //     );
+            // } else {
+            //     setIsSaved(false);
+            // }
+            const boolSavedFilms = savedMovies.some(
+                (savedMovie) =>
+                    savedMovie.movieId == card.id &&
+                    savedMovie.owner == currentUser._id
+            )
+            if(boolSavedFilms){
+                setIsSaved(true);
+            }else{
+                setIsSaved(false)
             }
         }
-    }, [pathname, filmsSaved, film.id]);
+        // if (savedMovies.length > 0) {
+        //         setIsSaved(
+        //             savedMovies.some((savedMovie) =>
+        //                 savedMovie.movieId == card.id &&
+        //                 savedMovie.owner == currentUser._id
+        //             )
+        //         );
+        // }
+    }, [savedMovies]);
 
-    // Функция для переключения сохраненных фильмов
-    function handleFavoriteToogle() {
-        const newFavorite = !favorite;
-        const savedFilm = filmsSaved.filter((obj) => obj.movieId == film.id);
-        savedMoviesToggle({...film, _id: savedFilm.length > 0 ? savedFilm[0]._id : null}, newFavorite);
-    }
+    console.log(savedMovies.some((savedMovie) => {
+        console.log(savedMovie)
+        console.log(currentUser._id)
+        console.log(savedMovie.movieId)
+        console.log(card.id)
+        return savedMovie.movieId === card.id &&
+            savedMovie.owner === currentUser._id
+    }));
 
-    // Функция для удаления сохраненных фильмов
-    function handleFavoriteDelete() {
-        savedMoviesToggle(film, false);
-    }
+    const moviesIcon = isSaved ? `card__button card__button_active` : `card__button card__button_inactive`;
+    const icon = location.pathname === '/movies' ? moviesIcon : 'card__button_delete';
 
-    // Функция для получения времени
-    function getMovieDuration(mins) {
-        return `${Math.floor(mins / 60)}ч ${mins % 60}м`;
-    }
+    const handleLike = () => {
+        if (!isSaved) {
+            for (let key in card) {
+                if (card[key] === null || card[key] === '') card[key] = 'нет данных';
+            }
+
+            api.saveMovie(card)
+                .then((res) => {
+                    if (res) {
+                        setIsSaved(true);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            savedMovies.forEach((savedMovie) => {
+                if (savedMovie.movieId === card.id) {
+                    api.deleteMovie(savedMovie._id).catch((err) => {
+                        console.log(err);
+                    });
+                }
+            });
+            setIsSaved(false);
+        }
+    };
+
+    const unsave = () => {
+        api.deleteMovie(card._id).catch((err) => {
+            console.log(err);
+        });
+        const newSavedMoviesList = savedMovies.filter(function (c) {
+            return c._id !== card._id;
+        });
+        setSavedMovieList(newSavedMoviesList);
+    };
 
     return (
-        <li className="card">
-            <a className="card__image-content"
-               href={pathname === '/saved-movies' ? film.trailer : film.trailerLink}
-               target="_blank"
-               rel="noreferrer"
-            >
-                <img className="card__image"
-                     src={pathname === '/saved-movies' ? `${film.image}` : `https://api.nomoreparties.co${film.image.url}`}
-                     alt={film.nameRU}></img>
-            </a>
-            <div className="card__element">
-                <p className="card__title">{film.nameRU}</p>
-                <div className="card__buttons">
+        <>
+            <li className="card">
+                <a className="card__image-content"
+                   href={trailerLink}
+                   target="_blank"
+                   rel="noreferrer"
+                >
+                    <img className="card__image"
+                         src={cardImageLink}
+                         alt='Фильм'
+                    ></img>
+                </a>
+                <div className="card__element">
+                    <p className="card__title">{cardTitle}</p>
+                    <div className="card__buttons">
 
-                    {
-                        pathname === '/saved-movies' ?
-                            (
-                                <button type="button" className="card__button card__button_delete"
-                                        onClick={handleFavoriteDelete}/>
-                            )
-                            :
-                            (
-                                <button type="button"
-                                        className={`card__button card__button${favorite ? '_active' : '_inactive'}`}
-                                        onClick={handleFavoriteToogle}/>
-                            )
-                    }
+                        {/*{*/}
+                        {/*    pathname === '/saved-movies' ?*/}
+                        {/*        (*/}
+                        {/*            <button type="button" className="card__button card__button_delete"*/}
+                        {/*                    onClick={handleFavoriteDelete}/>*/}
+                        {/*        )*/}
+                        {/*        :*/}
+                        {/*        (*/}
+                        {/*            <button type="button"*/}
+                        {/*                    className={`card__button card__button${favorite ? '_active' : '_inactive'}`}*/}
+                        {/*                    onClick={handleFavoriteToogle}/>*/}
+                        {/*        )*/}
+                        {/*}*/}
+                        <button type="button"
+                            // className={`card__button card__button_active`}
+                                className={icon}
+                                onClick={location.pathname === '/movies' ? handleLike : unsave}/>
 
+                    </div>
                 </div>
-            </div>
-            <p className="card__duration">{getMovieDuration(film.duration)}</p>
-        </li>
+                <p className="card__duration">{duration}</p>
+            </li>
+        </>
     );
-};
+}
 
 export default MoviesCard;
+

@@ -24,7 +24,6 @@ const SavedMovies = ({openPopup}) => {
         setErrorText('');
         setPreloader(true);
 
-
         try {
             const data = films;
             let filterData = data.filter(({nameRU}) => nameRU.toLowerCase().includes(inputSearch.toLowerCase()));
@@ -105,7 +104,6 @@ const SavedMovies = ({openPopup}) => {
             {
                 preloader && <Preloader/>
             }
-
             {
                 errorText && <div className="cards__text_status">{errorText}</div>
             }

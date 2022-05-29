@@ -87,6 +87,59 @@ class MainApi {
         this._headers.Authorization = `Bearer ${localStorage.getItem('jwt')}`;
     }
     //Token
+
+    getSavedMovies() {
+        return fetch(this._address + '/movies', {
+            headers: this._headers,
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+
+                return Promise.reject({ message: `Ошибка: ${res.status}` });
+            })
+            .then((res) => {
+                return res;
+            });
+    }
+
+    saveMovie(movie) {
+        return fetch(this._address + '/movies', {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                country: movie.country,
+                director: movie.director,
+                duration: movie.duration,
+                year: `${movie.year}`,
+                description: movie.description,
+                image: `https://api.nomoreparties.co${movie.image.url}`,
+                trailerLink: movie.trailerLink,
+                nameRU: movie.nameRU,
+                nameEN: movie.nameEN,
+                movieId: parseInt(movie.id),
+                thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
+            }),
+        }).then((data) => {
+            if (data.ok) {
+                return data.json();
+            }
+            return Promise.reject(`Ошибка: ${data.status}`);
+        });
+    }
+
+    deleteMovie(movieId) {
+        return fetch(this._address + '/movies/' + movieId, {
+            method: 'DELETE',
+            headers: this._headers,
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
+    }
 }
 
 const mainApi = new MainApi({

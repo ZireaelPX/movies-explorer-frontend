@@ -16,6 +16,7 @@ function MoviesCard({
                         trailerLink,
                         savedMovies,
                         setSavedMovieList,
+                        updateSavedMovies
                     }) {
     const currentUser = React.useContext(CurrentUserContext);
     const location = useLocation();
@@ -69,6 +70,32 @@ function MoviesCard({
 
     const handleLike = (e) => {
         console.log(e.target.classList.contains('card__button_active'))
+        // updateSavedMovies();
+        // if (!isSaved) {
+        //     for (let key in card) {
+        //         if (card[key] === null || card[key] === '') card[key] = 'нет данных';
+        //     }
+        //
+        //     api
+        //         .saveMovie(card)
+        //         .then((res) => {
+        //             if (res) {
+        //                 setIsSaved(true);
+        //             }
+        //         })
+        //         .catch((err) => {
+        //             console.log(err);
+        //         });
+        // } else {
+        //     savedMovies.forEach((savedMovie) => {
+        //         if (savedMovie.movieId === card.id) {
+        //             api.deleteMovie(savedMovie._id).catch((err) => {
+        //                 console.log(err);
+        //             });
+        //         }
+        //     });
+        //     setIsSaved(false);
+        // }
         if (e.target.classList.contains('card__button_inactive')) {
             for (let key in card) {
                 if (card[key] === null || card[key] === '') card[key] = 'нет данных';
@@ -84,6 +111,7 @@ function MoviesCard({
                     console.log(err);
                 });
         } else if (e.target.classList.contains('card__button_active')) {
+            // updateSavedMovies();
             console.log(card.id)
             savedMovies.forEach((savedMovie) => {
                 if (savedMovie.movieId == card.id) {
@@ -144,7 +172,8 @@ function MoviesCard({
                             // className={`card__button card__button_active`}
                                 className={icon}
                                 onClick={(e) => {
-                                    location.pathname === '/movies' ? handleLike(e) : unsave()
+                                    // updateSavedMovies();
+                                    location.pathname === '/movies' ? handleLike(e) : unsave();
                                 }}/>
 
                     </div>

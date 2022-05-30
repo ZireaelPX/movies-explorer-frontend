@@ -87,6 +87,20 @@ function Movies() {
             .catch((err) => console.log(err));
     }, [location]);
 
+    function updateSavedMovies(){
+        api.getSavedMovies()
+            .then((movies) => {
+                if (movies.message) {
+                    console.log(movies.message);
+                }
+                if (movies.length > 0 && movies !== undefined) {
+                    setSavedMovieList(movies);
+                }
+            })
+            .catch((err) => console.log(err));
+    }
+
+
     React.useEffect(() => {
         if (location.pathname === '/saved-movies') {
             if (savedMovieList.length > 0) {
@@ -226,6 +240,7 @@ function Movies() {
                     setSavedMovieList={setSavedMovieList}
                     movieListVisible={movieListVisible}
                     checkboxChecked={checkboxChecked}
+                    updateSavedMovies={updateSavedMovies}
                 />
             )}
 

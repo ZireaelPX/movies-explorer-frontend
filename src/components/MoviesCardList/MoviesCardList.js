@@ -9,6 +9,7 @@ function MoviesCardList({
                             savedMovies,
                             setSavedMovieList,
                             savedMovieListFound,
+                            updateSavedMovies
                         }) {
     const location = useLocation();
     const [sm, setSm] = React.useState([]);
@@ -46,6 +47,7 @@ function MoviesCardList({
                             trailerLink={card.trailerLink}
                             duration={convertTime(card.duration)}
                             savedMovies={savedMovies}
+                            updateSavedMovies={updateSavedMovies}
                         />
                     ))}
                 {location.pathname === '/saved-movies' &&

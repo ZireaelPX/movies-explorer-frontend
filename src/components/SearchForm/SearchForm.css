@@ -7,7 +7,6 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-
 .search__container {
   display: flex;
   justify-content: space-between;
@@ -49,10 +48,6 @@
   font-weight: 500;
   line-height: 18px;
   transition: all 0.3s ease 0s;
-}
-
-.search__button:disabled{
-  opacity: 0.2;
 }
 
 .search__button:hover {

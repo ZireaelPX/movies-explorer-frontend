@@ -1,8 +1,8 @@
 import './Preloader.css';
 
-const Preloader = ({ preloaderVisible }) => {
+const Preloader = () => {
     return (
-        <div className={`preloader ${!preloaderVisible && 'preloader_hidden'}`}>
+        <div className="preloader">
             <div className="preloader__container">
                 <span className="preloader__round"></span>
             </div>

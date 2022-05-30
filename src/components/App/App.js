@@ -134,7 +134,7 @@ function App() {
                     <ProtectedRoute
                         path="/saved-movies"
                         loggedIn={loggedIn}
-                        component={Movies}
+                        component={SavedMovies}
                         isLoading={isLoading}
                         openPopup={openPopup}
                     />

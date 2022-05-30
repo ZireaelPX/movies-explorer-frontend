@@ -1,72 +1,39 @@
-import React from 'react';
 import {useLocation} from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
+
 import './MoviesCardList.css';
 
-
-function MoviesCardList({
-                            movies,
-                            savedMovies,
-                            setSavedMovieList,
-                            savedMovieListFound,
-                            updateSavedMovies
-                        }) {
-    const location = useLocation();
-    const [sm, setSm] = React.useState([]);
-
-    React.useEffect(() => {
-        if (savedMovieListFound.length > 0) {
-            setSm(savedMovieListFound);
-        } else {
-            setSm(savedMovies);
-        }
-    }, [savedMovieListFound, savedMovies]);
-    const convertTime = (totalMinutes) => {
-        const hours = Math.floor(totalMinutes / 60);
-        const minutes = totalMinutes % 60;
-        const finalResult = `${hours}ч ${minutes}м`;
-        return finalResult;
-    };
+const MoviesCardList = ({films, savedMoviesToggle, filmsSaved, filmsRemains, handleMore}) => {
+    const {pathname} = useLocation();
 
     return (
         <section className="cards">
-            <ul
-                className="cards__list"
-            >
-                {location.pathname === '/movies' &&
-                    movies.map((card) => (
-                        <MoviesCard
-                            card={card}
-                            key={card.id}
-                            cardTitle={card.nameRU}
-                            cardImageLink={
-                                card.image
-                                    ? `https://api.nomoreparties.co` + card.image.url
-                                    : null
-                            }
-                            trailerLink={card.trailerLink}
-                            duration={convertTime(card.duration)}
-                            savedMovies={savedMovies}
-                            updateSavedMovies={updateSavedMovies}
-                        />
-                    ))}
-                {location.pathname === '/saved-movies' &&
-                    sm.map((card) => (
-                        <MoviesCard
-                            card={card}
-                            key={card._id}
-                            cardTitle={card.nameRU}
-                            cardImageLink={card.image ? card.image : null}
-                            trailerLink={card.trailer}
-                            duration={convertTime(card.duration)}
-                            savedMovies={savedMovies}
-                            setSavedMovieList={setSavedMovieList}
-                        />
-                    ))}
-            </ul>
+            {
+                films.length > 0 ? (
+                    <ul className="cards__list">
+                        {films.map((film) => (
+                            <MoviesCard
+                                key={film.id || film.movieId}
+                                film={film}
+                                savedMoviesToggle={savedMoviesToggle}
+                                filmsSaved={filmsSaved}
+                            />
+                        ))}
+                    </ul>
+                ) : (
+                    <div className="cards__text_status">Фильмы не найдены!</div>
+                )
+            }
+
+            {
+                filmsRemains.length > 0 && pathname !== '/saved-movies' && (
+                    <div className="cards__button-container">
+                        <button className="cards__button" type="button" name="more" onClick={handleMore}>Ещё</button>
+                    </div>
+                )
+            }
         </section>
     );
-}
+};
 
 export default MoviesCardList;
-

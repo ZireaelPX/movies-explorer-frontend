@@ -1,258 +1,218 @@
-
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import ShowMore from '../ShowMore/ShowMore';
 import Preloader from '../Preloader/Preloader';
-import { SHORT_MOVIE } from '../../utils/constants';
+
+import {DURATION_LITTLE_MOVIE, MoviesCount} from '../../utils/constants';
+
+import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi.js';
 
 import './Movies.css';
 
-import MoviesApi from '../../utils/MoviesApi';
-import api from '../../utils/MainApi';
+const Movies = ({openPopup}) => {
+    const [films, setFilms] = useState(null);
+    const [filmsSaved, setFilmsSaved] = useState(null);
+    const [preloader, setPreloader] = useState(false);
+    const [errorText, setErrorText] = useState('');
+    const [filmsTumbler, setFilmsTumbler] = useState(false);
+    const [filmsInputSearch, setFilmsInputSearch] = useState('');
+    const [MoviesCount, setMoviesCount] = useState([]);
+    const [filmsShowed, setFilmsShowed] = useState(null);
+    const [filmsWithTumbler, setFilmsWithTumbler] = useState([]);
+    const [filmsShowedWithTumbler, setFilmsShowedWithTumbler] = useState([]);
 
-function Movies() {
-    const location = useLocation();
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const [queryResult, setQueryResult] = React.useState([]);
-    const [checkboxChecked, setCheckboxChecked] = React.useState(false);
-    const [preloaderVisible, setPreloaderVisible] = React.useState(false);
-    const [showMoreVisible, setShowMoreVisible] = React.useState(false);
-    const [movieListVisible, setMovieListVisible] = React.useState(false);
-    const [savedMovieList, setSavedMovieList] = React.useState([]);
-    const [savedMovieListFound, setSavedMovieListFound] = React.useState([]);
-    const [searchErrorVisible, setSearchErrorVisible] = React.useState(false);
-    const [wasThereASearch, setWasThereASearch] = React.useState(false);
-    const [howManyToRender, setHowManyToRender] = React.useState(3);
-    const [clickCounter, setClickCounter] = React.useState(1);
+    useEffect(() => {
+        // handleToggleMenu(false);
+        setMoviesCount(getMoviesCount());
+        const handlerResize = () => setMoviesCount(getMoviesCount());
+        window.addEventListener('resize', handlerResize);
 
-    const [initialCards, setInitialCards] = React.useState(
-        JSON.parse(localStorage.getItem('movies')) || []
-    );
-    const [initialCardsCount, setInitialCardsCount] = React.useState(12);
+        return () => {
+            window.removeEventListener('resize', handlerResize);
+        };
+    }, []);
 
-    const [renderedCards, setRenderedCards] = React.useState([]);
+    // Функция для объекта сохранения нового фильма
+    function createSavedFilm(film) {
+        return {
+            image: 'https://api.nomoreparties.co' + film.image.url,
+            trailerLink: film.trailerLink,
+            thumbnail: 'https://api.nomoreparties.co' + film.image.url,
+            movieId: film.id,
+            country: film.country || 'Земля',
+            director: film.director,
+            duration: film.duration,
+            year: film.year,
+            description: film.description,
+            nameRU: film.nameRU,
+            nameEN: film.nameEN,
+        };
+    }
 
-    const [windowSize, setWindowSize] = React.useState({
-        width: undefined,
-    });
+    // Конфигурация
+    function getMoviesCount() {
+        let countCards;
+        const clientWidth = document.documentElement.clientWidth;
+        const MoviesCount = {
+            '1280': [12, 4],
+            '960': [9, 3],
+            '768': [8, 2],
+            '320': [5, 2],
+        };
 
+        Object.keys(MoviesCount).sort((a, b) => a - b).forEach((key) => {
+            if (clientWidth > +key) {
+                countCards = MoviesCount[key];
+            }
+        });
 
-    React.useEffect(() => {
-        function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
+        return countCards;
+    }
+
+    function handleMore() {
+        const spliceFilms = films;
+        const newFilmsShowed = filmsShowed.concat(spliceFilms.splice(0, MoviesCount[1]));
+        setFilmsShowed(newFilmsShowed);
+        setFilms(spliceFilms);
+    }
+
+    // Получение фильмов
+    async function handleGetMovies(inputSearch) {
+        setFilmsTumbler(false);
+        localStorage.setItem('filmsTumbler', false);
+
+        if (!inputSearch) {
+            setErrorText('Введите символы!');
+            return false;
+        }
+
+        setErrorText('');
+        setPreloader(true);
+
+        try {
+            const data = await moviesApi.getMovies();
+
+            let filterData = data.filter(({nameRU}) => nameRU.toLowerCase().includes(inputSearch.toLowerCase()));
+
+            localStorage.setItem('films', JSON.stringify(filterData));
+            localStorage.setItem('filmsInputSearch', inputSearch);
+
+            const spliceData = filterData.splice(0, MoviesCount[0]);
+
+            setFilmsShowed(spliceData);
+            setFilms(filterData);
+            setFilmsShowedWithTumbler(spliceData);
+            setFilmsWithTumbler(filterData);
+        } catch (err) {
+            setErrorText(
+                'Во время запроса произошла ошибка...'
+            );
+            setFilms([]);
+
+            localStorage.removeItem('films');
+            localStorage.removeItem('filmsTumbler');
+            localStorage.removeItem('filmsInputSearch');
+        } finally {
+            setPreloader(false);
+        }
+    }
+
+    async function handleGetMoviesTumbler(tumbler) {
+        let filterDataShowed = [];
+        let filterData = [];
+
+        if (tumbler) {
+            setFilmsShowedWithTumbler(filmsShowed);
+            setFilmsWithTumbler(films);
+            filterDataShowed = filmsShowed.filter(({duration}) => duration <= DURATION_LITTLE_MOVIE);
+            filterData = films.filter(({duration}) => duration <= DURATION_LITTLE_MOVIE);
+        } else {
+            filterDataShowed = filmsShowedWithTumbler;
+            filterData = filmsWithTumbler;
+        }
+
+        localStorage.setItem('films', JSON.stringify(filterDataShowed.concat(filterData)));
+        localStorage.setItem('filmsTumbler', tumbler);
+
+        setFilmsShowed(filterDataShowed);
+        setFilms(filterData);
+    }
+
+    // Функция для сохранения и удаления нового фильма
+    async function savedMoviesToggle(film, favorite) {
+        if (favorite) {
+            const objFilm = createSavedFilm(film);
+
+            try {
+                await mainApi.addMovies(objFilm);
+                const newSaved = await mainApi.getMovies();
+                setFilmsSaved(newSaved);
+            } catch (err) {
+                openPopup('Не исполнено...');
+            }
+
+        } else {
+
+            try {
+                await mainApi.deleteMovies(film._id);
+                const newSaved = await mainApi.getMovies();
+                setFilmsSaved(newSaved);
+            } catch (err) {
+                openPopup('Не исполнено...');
+            }
+
+        }
+    }
+
+    useEffect(() => {
+        mainApi.getMovies()
+            .then((data) => {
+                setFilmsSaved(data);
+            })
+            .catch((err) => {
+                openPopup(`Ошибка сервера ${err}`);
             });
-        }
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        howManyCards();
-        return () => window.removeEventListener('resize', handleResize);
-    }, [windowSize.width, location]);
 
-    function howManyCards() {
-        if (windowSize.width <= 480) {
-            setInitialCardsCount(5);
-            setHowManyToRender(2);
-            setClickCounter(1);
-        } else if (windowSize.width <= 1000) {
-            setInitialCardsCount(8);
-            setHowManyToRender(2);
-            setClickCounter(1);
-        } else {
-            setInitialCardsCount(12);
-            setHowManyToRender(3);
-            setClickCounter(1);
-        }
-    }
+        const localStorageFilms = localStorage.getItem('films');
 
-    React.useEffect(() => {
-        setSearchQuery('');
-        api.getSavedMovies()
-            .then((movies) => {
-                if (movies.message) {
-                    console.log(movies.message);
-                }
-                if (movies.length > 0 && movies !== undefined) {
-                    setSavedMovieList(movies);
-                    setSearchErrorVisible(false);
-                    if (location.pathname === '/saved-movies') {
-                        setQueryResult(movies);
-                    } else {
-                        setQueryResult(initialCards);
-                    }
-                }
-            })
-            .catch((err) => console.log(err));
-    }, [location]);
-
-    function updateSavedMovies(){
-        api.getSavedMovies()
-            .then((movies) => {
-                if (movies.message) {
-                    console.log(movies.message);
-                }
-                if (movies.length > 0 && movies !== undefined) {
-                    setSavedMovieList(movies);
-                }
-            })
-            .catch((err) => console.log(err));
-    }
-
-
-    React.useEffect(() => {
-        if (location.pathname === '/saved-movies') {
-            if (savedMovieList.length > 0) {
-                setMovieListVisible(true);
-                setSearchErrorVisible(false);
-            } else {
-                setSearchErrorVisible(true);
-            }
-        }
-        if (location.pathname === '/movies' && localStorage.getItem('movies')) {
-            setSearchErrorVisible(false);
-            setRenderedCards(initialCards.slice(0, initialCardsCount));
-            setMovieListVisible(true);
-            setPreloaderVisible(false);
-            setShowMoreVisible(true);
-        }
-        setSavedMovieListFound([]); //
-    }, [location.pathname, savedMovieList.length]);
-
-    React.useEffect(() => {
-        if (initialCards.length > 0 || initialCards !== null) {
-            setQueryResult(initialCards);
-            setRenderedCards(initialCards.slice(0, initialCardsCount));
-        }
-    }, [initialCardsCount]);
-
-    React.useEffect(() => {
-        if (queryResult.length > renderedCards.length) {
-            setShowMoreVisible(true);
-        } else {
-            setShowMoreVisible(false);
+        if (localStorageFilms) {
+            const filterData = JSON.parse(localStorageFilms);
+            setFilmsShowed(filterData.splice(0, getMoviesCount()[0]));
+            setFilms(filterData);
+            setPreloader(false);
         }
 
-        if (queryResult.length <= 0) {
-            setMovieListVisible(false);
-            setSearchErrorVisible(true);
-            setShowMoreVisible(false);
-        } else {
-            setMovieListVisible(true);
-            setSearchErrorVisible(false);
-        }
-    }, [renderedCards, queryResult]);
+        const localStorageFilmsTumbler = localStorage.getItem('filmsTumbler');
+        const localStorageFilmsInputSearch = localStorage.getItem('filmsInputSearch');
 
-    React.useEffect(() => {
-        if (wasThereASearch && searchQuery !== '') handleSearch();
-    }, [checkboxChecked]);
+        if (localStorageFilmsTumbler)
+            setFilmsTumbler(localStorageFilmsTumbler === 'true');
 
-    function handleSearch() {
-        setWasThereASearch(true);
-        setClickCounter(1);
-        setPreloaderVisible(true);
-        if (location.pathname === '/movies') {
-            if (!localStorage.getItem('movies')) {
-                MoviesApi.getMovies()
-                    .then((movieList) => {
-                        localStorage.setItem('movies', JSON.stringify(movieList));
-                        setInitialCards(JSON.parse(localStorage.getItem('movies')));
-                        const filteredMovies = filter(
-                            JSON.parse(localStorage.getItem('movies'))
-                        );
-                        setMovieListVisible(true);
-                        setQueryResult(filteredMovies);
-                        setRenderedCards(filteredMovies.slice(0, initialCardsCount));
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-                setInitialCards(JSON.parse(localStorage.getItem('movies')));
-                return;
-            }
-            const filteredMovies = filter(initialCards);
-            if (filteredMovies.length <= 0) {
-                setSearchErrorVisible(true);
-            } else {
-                setSearchErrorVisible(false);
-                setMovieListVisible(true);
-            }
-            setQueryResult(filteredMovies);
-            setRenderedCards(filteredMovies.slice(0, initialCardsCount));
-        } else {
-            const filteredMovies = filter(savedMovieList);
-            setQueryResult(filteredMovies);
-            setSavedMovieListFound(filteredMovies);
-        }
-    }
+        if (localStorageFilmsInputSearch)
+            setFilmsInputSearch(localStorageFilmsInputSearch);
 
-    function search(e) {
-        e.preventDefault();
-        handleSearch();
-        e.target.reset();
-    }
-
-    function filter(movieList) {
-        const filteredMovies = movieList.filter((movie) => {
-            const movieToLC = movie.nameRU.toLowerCase();
-            return movieToLC.includes(searchQuery.toLowerCase());
-        });
-        if (checkboxChecked) {
-            setPreloaderVisible(false);
-            return handleShortFilms(filteredMovies);
-        }
-        setPreloaderVisible(false);
-        return filteredMovies;
-    }
-
-    function handleShortFilms(movieList) {
-        return movieList.filter((movie) => {
-            return movie.duration <= SHORT_MOVIE;
-        });
-    }
-
-    function handleShowMore() {
-        setClickCounter(clickCounter + 1);
-        setRenderedCards(
-            queryResult.slice(0, initialCardsCount + howManyToRender * clickCounter)
-        );
-    }
+    }, [openPopup]);
 
     return (
-        <div className='movies'>
-            <SearchForm
-                handleSearch={search}
-                setSearchQuery={setSearchQuery}
-                checkboxChecked={checkboxChecked}
-                setCheckboxChecked={setCheckboxChecked}
-            />
-            {searchErrorVisible ||
-            (!localStorage.getItem('movies') && location.pathname === '/movies') ? (
-                <p className='cards__text_status'>
-                    Ничего не найдено. Попробуйте другой запрос!
-                </p>
-            ) : (
-                <MoviesCardList
-                    movies={renderedCards}
-                    savedMovies={savedMovieList}
-                    savedMovieListFound={savedMovieListFound}
-                    setSavedMovieList={setSavedMovieList}
-                    movieListVisible={movieListVisible}
-                    checkboxChecked={checkboxChecked}
-                    updateSavedMovies={updateSavedMovies}
-                />
-            )}
-
-            <Preloader preloaderVisible={preloaderVisible} />
-            {location.pathname === '/movies' && (
-                <ShowMore
-                    showMoreVisible={showMoreVisible}
-                    handleShowMore={handleShowMore}
-                />
-            )}
+        <div className="movies">
+            <SearchForm handleGetMovies={handleGetMovies} filmsTumbler={filmsTumbler}
+                        filmsInputSearch={filmsInputSearch} handleGetMoviesTumbler={handleGetMoviesTumbler}/>
+            {
+                preloader && <Preloader/>
+            }
+            {
+                errorText && <div className="cards__text_status">{errorText}</div>
+            }
+            {
+                !preloader && !errorText && films !== null && filmsSaved !== null && filmsShowed !== null &&
+                (
+                    <MoviesCardList handleMore={handleMore} filmsRemains={films} films={filmsShowed}
+                                    savedMoviesToggle={savedMoviesToggle} filmsSaved={filmsSaved}/>
+                )
+            }
         </div>
     );
-}
+};
 
 export default Movies;

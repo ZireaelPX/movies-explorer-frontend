@@ -1,31 +1,36 @@
-import {useState} from 'react';
+import {useLocation} from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
 
 import './MoviesCardList.css';
 
-const MoviesCardList = ({cards, buttonMore}) => {
-    const [isLoading, setLoading] = useState(false);
-
-    const handlePreloader = () => {
-        setLoading(true);
-    };
+const MoviesCardList = ({films, savedMoviesToggle, filmsSaved, filmsRemains, handleMore}) => {
+    const {pathname} = useLocation();
 
     return (
         <section className="cards">
-            <ul className="cards__list">
-                {cards.map((card) => (
-                    <MoviesCard key={card.id} card={card}/>
-                ))}
-            </ul>
             {
-                isLoading ?
-                    <Preloader/> :
-                    buttonMore &&
+                films.length > 0 ? (
+                    <ul className="cards__list">
+                        {films.map((film) => (
+                            <MoviesCard
+                                key={film.id || film.movieId}
+                                film={film}
+                                savedMoviesToggle={savedMoviesToggle}
+                                filmsSaved={filmsSaved}
+                            />
+                        ))}
+                    </ul>
+                ) : (
+                    <div className="cards__text_status">Фильмы не найдены!</div>
+                )
+            }
+
+            {
+                filmsRemains.length > 0 && pathname !== '/saved-movies' && (
                     <div className="cards__button-container">
-                        <button className="cards__button" type="button" name="more" onClick={handlePreloader}>Ещё
-                        </button>
+                        <button className="cards__button" type="button" name="more" onClick={handleMore}>Ещё</button>
                     </div>
+                )
             }
         </section>
     );

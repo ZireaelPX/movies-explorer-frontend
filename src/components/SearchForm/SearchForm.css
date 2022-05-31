@@ -94,7 +94,7 @@
 .search__slider {
   position: absolute;
   inset: 0;
-  background-color: white;
+  background-color: #67f8a9;
   border-radius: 16px;
   transition: .6s;
   transform: scale(-1, -1);
@@ -109,7 +109,7 @@
   bottom: 1px;
   border: 1px solid #fff;
   border-radius: 50%;
-  background-color: #14b05b;
+  background-color: #0c8343;
 }
 
 @media (max-width: 800px) {

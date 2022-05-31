@@ -34,11 +34,11 @@
   display: none;
   margin: 0;
   padding: 0;
-  width: 22px;
-  height: 22px;
+  width: 43px;
+  height: 43px;
   outline: none;
   border: none;
-  background: transparent url('../../images/icon-close.svg') center center / 32px no-repeat;
+  background: transparent url('../../images/icon-close.svg') 100%/43px no-repeat;
   align-self: flex-end;
   transition: all 0.3s ease 0s;
 }
@@ -77,7 +77,7 @@
 }
 
 .navigation__link_active {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .navigation__link_type_profile {
@@ -90,11 +90,20 @@
   border-radius: 20px;
   background-color: #F9F9F9;
   font-size: 14px;
+  border: 1px solid #000000;
+}
+
+.navigation__link_path_color {
+  color: #ffffff;
 }
 
 @media (max-width: 800px) {
   .navigation__btn-menu {
     display: flex;
+  }
+
+  .navigation__link_path_color {
+    color: #000;
   }
 
   .navigation__container {
@@ -117,7 +126,7 @@
     min-height: 100vh;
     margin-left: auto;
     flex-direction: column;
-    padding: 27px 27px 90px;
+    padding: 18px 27px 90px;
     background-color: #fff;
   }
 

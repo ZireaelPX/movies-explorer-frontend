@@ -8,7 +8,7 @@ const AboutMe = () => {
             <div className="about-me__container">
                 <div className="about-me__info">
                     <h3 className="about-me__name">Артём</h3>
-                    <p className="about-me__job">Фронтенд-разработчик, 19 лет</p>
+                    <p className="about-me__job">Фронтенд-разработчик, 20 лет</p>
                     <p className="about-me__description">
                         Я родился в городе Чебоксары и живу в Новочебоксарске. Заканчиваю обучение в ЧЭМК.
                         Моя специальность: "Разработчик веб и мультимедийных приложений". Люблю читать произведения на

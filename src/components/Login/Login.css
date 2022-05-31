@@ -120,6 +120,13 @@
 .form__error-display {
     opacity: 1;
 }
+.form__button_disabled {
+    background-color: #d9d9d9;
+    color: #000;
+    cursor: default;
+    pointer-events: none;
+    opacity: .2;
+}
 
 @media (max-width: 800px) {
     .form {
